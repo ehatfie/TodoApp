@@ -15,6 +15,7 @@
 		BA5C58C32565F84400178AB4 /* TodoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58C12565F84400178AB4 /* TodoApp.xcdatamodeld */; };
 		BA5C58CE2565F84400178AB4 /* TodoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58CD2565F84400178AB4 /* TodoAppTests.swift */; };
 		BA5C58D92565F84400178AB4 /* TodoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58D82565F84400178AB4 /* TodoAppUITests.swift */; };
+		BA5C58EA2565FDEE00178AB4 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58E92565FDEE00178AB4 /* APICaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		BA5C58D42565F84400178AB4 /* TodoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5C58D82565F84400178AB4 /* TodoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppUITests.swift; sourceTree = "<group>"; };
 		BA5C58DA2565F84400178AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA5C58E92565FDEE00178AB4 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				BA5C58C42565F84400178AB4 /* Info.plist */,
 				BA5C58C12565F84400178AB4 /* TodoApp.xcdatamodeld */,
 				BA5C58BC2565F84400178AB4 /* Preview Content */,
+				BA5C58E92565FDEE00178AB4 /* APICaller.swift */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				BA5C58C02565F84400178AB4 /* Persistence.swift in Sources */,
 				BA5C58B92565F84200178AB4 /* ContentView.swift in Sources */,
 				BA5C58B72565F84200178AB4 /* TodoAppApp.swift in Sources */,
+				BA5C58EA2565FDEE00178AB4 /* APICaller.swift in Sources */,
 				BA5C58C32565F84400178AB4 /* TodoApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
