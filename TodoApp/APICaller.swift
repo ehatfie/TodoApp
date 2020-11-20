@@ -30,9 +30,9 @@ class APICaller {
                 if let data = data {
                     let decoder = JSONDecoder()
                     
-                    print("data", data)
-                    print("res", res)
-                    print("err", err)
+//                    print("data", data)
+//                    print("res", res)
+//                    print("err", err)
                     if let string = data as? String {
                         print("STRING \(string)")
                     }
