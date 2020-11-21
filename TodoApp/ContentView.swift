@@ -16,14 +16,18 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
     private var dataItems: [DecodedObject] = []
+    
+    @State var presentingModal = false
 
     var body: some View {
         VStack {
             HStack {
-                Button("Add Random", action: addRandom)
+                Button("Present") { self.presentingModal = true }
+                        .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
                 Button("Add 3 random", action: addMultipleRandom)
-                Button("FETCH", action: fetchData)
-                Button("DELETE", action: deleteAll)
+                Button("Fetch sync", action: fetchData)
+                Button("Fetch async", action: fetchDataAsync)
+                Button("Delete", action: deleteAll)
             }
             
             List {
@@ -58,6 +62,16 @@ struct ContentView: View {
     }
     
     private func fetchData() {
+        APICaller.shared.fetchData { data in
+            print("received \(data.count) values")
+            DispatchQueue.main.sync {
+                self.addResult(data: data)
+            }
+
+        }
+    }
+    
+    private func fetchDataAsync() {
         APICaller.shared.fetchData { data in
             print("received \(data.count) values")
             DispatchQueue.main.async {
