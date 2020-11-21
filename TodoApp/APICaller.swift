@@ -10,7 +10,7 @@ import Foundation
 class DecodedObject: Decodable, Identifiable {
     let id: String
     let title: String
-    let completed: Bool
+    //let completed: Bool
 }
 
 class DecodedObjectOuter: Decodable {
@@ -18,7 +18,7 @@ class DecodedObjectOuter: Decodable {
 }
 
 class APICaller {
-    private var urlString: String = "http://localhost:8080/todos/"
+    private var urlString: String = "http://localhost:8080/todos"
     
     static var shared: APICaller = APICaller()
     
@@ -63,25 +63,25 @@ class APICaller {
         
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        URLSession.shared.uploadTask(with: urlRequest, from: data).resume()
-//        URLSession.shared.dataTask(with: url) { data, res, err in
-//            if let data = data {
-//                let decoder = JSONDecoder()
-//                
-////                    print("data", data)
-////                    print("res", res)
-////                    print("err", err)
-//                if let string = data as? String {
-//                    print("STRING \(string)")
-//                }
-//                
-//                if let json = try? decoder.decode(DecodedObjectOuter.self, from: data) {
-//                    print("GOTTEM \(json)")
-//                    //completion(json.data)
-//                } else {
-//                    print("NO GOTTEM")
-//                }
-//            }
-//        }.resume()
+        URLSession.shared.uploadTask(with: urlRequest, from: data) { data, response, err in
+            print("RESPONSE")
+            if let data = data {
+                let decoder = JSONDecoder()
+                if let string = data as? String {
+                    print("STRING \(string)")
+                }
+                if let foo = try? decoder.decode(String.self, from: data) {
+                    print("FOO \(foo)")
+                }
+                if let json = try? decoder.decode(DecodedObject.self, from: data) {
+                    print("GOTTEM", json.title)
+                    
+                    completion(json)
+                } else {
+                    print("NO GOTTEM submit")
+                }
+            }
+
+        }.resume()
     }
 }

@@ -34,7 +34,7 @@ struct ContentView: View {
                 ForEach(items) { item in
                     HStack {
                         Text(item.title!)
-                        Text("is completed: \(getIsCompleted(isCompleted: item.completed))")
+                        Text("is completed: \(getIsCompleted(isCompleted: false))")
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -110,7 +110,7 @@ struct ContentView: View {
             let newItem = Item(context: viewContext)
             
             newItem.title = data.id
-            newItem.completed = data.completed
+            newItem.completed = false
             try? viewContext.save()
 //            do {
 //
@@ -125,27 +125,27 @@ struct ContentView: View {
     }
     
     private func addResult(data: [DecodedObject]) {
-       // withAnimation {
-            print("Animation")
-            //for value in data {
-            data.forEach { value in
-                
-                print("ADDING ", value.id)
-                let newItem = Item(context: viewContext)
-                newItem.title = value.title
-                newItem.completed = value.completed
+        print("Animation")
+        let resultsToSave = data.filter({ incomingObject in
+            return !self.items.contains(where: {$0.uuid == UUID(uuidString: incomingObject.id)})
+        })
+        
+        resultsToSave.forEach { value in
+            print("ADDING ", value.id)
+            let newItem = Item(context: viewContext)
+            newItem.uuid = UUID(uuidString: value.id)
+            newItem.title = value.title
+            newItem.completed = false //value.completed
             
-                do {
-                    try viewContext.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
-            //}
-       // }
+        }
         print("add result end", items.count)
     }
     
