@@ -12,36 +12,23 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.title, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Todo.title, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Todo>
     private var dataItems: [DecodedObject] = []
     
     @State var presentingModal = false
 
     var body: some View {
         VStack {
-            HStack {
-                Button("Present") { self.presentingModal = true }
-                        .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
-                Button("Add 3 random", action: addMultipleRandom)
-                Button("Fetch sync", action: fetchData)
-                Button("Fetch async", action: fetchDataAsync)
-                Button("Delete", action: deleteAll)
-            }
+            
+            //.border(Color.black)
             
             List {
                 ForEach(items) { item in
-                    HStack {
-                        Text(item.title!)
-                        Text("is completed: \(getIsCompleted(isCompleted: false))")
-                    }
+                    TodoCellView(todo: item)
                 }
                 .onDelete(perform: deleteItems)
-//                ForEach(dataItems) { item in
-//                    Text("Item at \(item, formatter: itemFormatter)")
-//                }
-//                .onDelete(perform: deleteItems)
             }
             .toolbar {
                 #if os(iOS)
@@ -52,6 +39,22 @@ struct ContentView: View {
                     Label("Add Item", systemImage: "plus")
                 }
             }
+            HStack {
+                Button("Present") { self.presentingModal = true }
+                        .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
+                Button("Add 3 random", action: addMultipleRandom)
+                VStack {
+                    Button("Fetch sync", action: fetchData)
+                    Button("Fetch async", action: fetchDataAsync)
+                }
+                
+                Button("Delete", action: deleteAll)
+            }
+            .padding()
+            .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.blue, lineWidth: 4)
+                )
         }
         
         
@@ -127,7 +130,7 @@ struct ContentView: View {
     private func addResult(data: [DecodedObject]) {
         print("Animation")
         let resultsToSave = data.filter({ incomingObject in
-            return !self.items.contains(where: {$0.uuid == UUID(uuidString: incomingObject.id)})
+            return !self.items.contains(where: {$0.id == UUID(uuidString: incomingObject.id)})
         })
         
         resultsToSave.forEach { value in
@@ -209,3 +212,12 @@ struct ContentView_Previews: PreviewProvider {
         }
     }
 }
+
+/*
+ TODO:
+    support for delete from backend
+    appropriate names for model definitions
+    figure out ui
+    move form submission to same screen
+    
+ */
