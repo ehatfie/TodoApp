@@ -69,9 +69,7 @@ class APICaller {
             print("RESPONSE")
             if let data = data {
                 let decoder = JSONDecoder()
-                if let string = data as? String {
-                    print("STRING \(string)")
-                }
+                
                 if let foo = try? decoder.decode(String.self, from: data) {
                     print("FOO \(foo)")
                 }

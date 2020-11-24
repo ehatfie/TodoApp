@@ -21,9 +21,6 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            
-            //.border(Color.black)
-            
             List {
                 ForEach(items) { item in
                     TodoCellView(todo: item)
@@ -52,10 +49,11 @@ struct ContentView: View {
             }
             .padding()
             .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.blue, lineWidth: 4)
-                )
-        }
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.blue, lineWidth: 4)
+            )
+            TabBar()
+        }.frame(maxHeight: .infinity, alignment: .bottom)
         
         
     }
@@ -207,7 +205,7 @@ private let itemFormatter: DateFormatter = {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    
             ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }

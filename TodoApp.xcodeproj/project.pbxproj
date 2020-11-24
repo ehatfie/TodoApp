@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA05F650256DC7D20041F627 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05F64F256DC7D20041F627 /* TabBar.swift */; };
+		BA05F658256DC82D0041F627 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05F657256DC82D0041F627 /* TabBarItem.swift */; };
 		BA5C58B72565F84200178AB4 /* TodoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58B62565F84200178AB4 /* TodoAppApp.swift */; };
 		BA5C58B92565F84200178AB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58B82565F84200178AB4 /* ContentView.swift */; };
 		BA5C58BB2565F84400178AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5C58BA2565F84400178AB4 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA05F64F256DC7D20041F627 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		BA05F657256DC82D0041F627 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		BA5C58B32565F84200178AB4 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5C58B62565F84200178AB4 /* TodoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppApp.swift; sourceTree = "<group>"; };
 		BA5C58B82565F84200178AB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA05F64E256DC7C30041F627 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				BA05F64F256DC7D20041F627 /* TabBar.swift */,
+				BA05F657256DC82D0041F627 /* TabBarItem.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		BA5C58AA2565F84200178AB4 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +166,7 @@
 		BA615CDD25676B4D003A8DD3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA05F64E256DC7C30041F627 /* TabBar */,
 				BAB1E34A256DC0920052937E /* Todos */,
 				BA615CEF25676DB9003A8DD3 /* ModalView.swift */,
 			);
@@ -316,11 +330,13 @@
 				BA5C58C02565F84400178AB4 /* Persistence.swift in Sources */,
 				BA5C58B92565F84200178AB4 /* ContentView.swift in Sources */,
 				BA5C58B72565F84200178AB4 /* TodoAppApp.swift in Sources */,
+				BA05F658256DC82D0041F627 /* TabBarItem.swift in Sources */,
 				BAB1E34C256DC0A40052937E /* TodoCellView.swift in Sources */,
 				BA5C58EA2565FDEE00178AB4 /* APICaller.swift in Sources */,
 				BA615CF625677239003A8DD3 /* TodoModel.swift in Sources */,
 				BA5C58C32565F84400178AB4 /* TodoApp.xcdatamodeld in Sources */,
 				BA86E7C125689076004D468E /* JSON.swift in Sources */,
+				BA05F650256DC7D20041F627 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
