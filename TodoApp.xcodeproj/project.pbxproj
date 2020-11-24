@@ -19,6 +19,7 @@
 		BA615CF025676DB9003A8DD3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA615CEF25676DB9003A8DD3 /* ModalView.swift */; };
 		BA615CF625677239003A8DD3 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA615CF525677239003A8DD3 /* TodoModel.swift */; };
 		BA86E7C125689076004D468E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86E7C025689076004D468E /* JSON.swift */; };
+		BAB1E34C256DC0A40052937E /* TodoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB1E34B256DC0A40052937E /* TodoCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BA615CEF25676DB9003A8DD3 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		BA615CF525677239003A8DD3 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		BA86E7C025689076004D468E /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		BAB1E34B256DC0A40052937E /* TodoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		BA615CDD25676B4D003A8DD3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BAB1E34A256DC0920052937E /* Todos */,
 				BA615CEF25676DB9003A8DD3 /* ModalView.swift */,
 			);
 			path = Views;
@@ -170,6 +173,14 @@
 				BA86E7C025689076004D468E /* JSON.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BAB1E34A256DC0920052937E /* Todos */ = {
+			isa = PBXGroup;
+			children = (
+				BAB1E34B256DC0A40052937E /* TodoCellView.swift */,
+			);
+			path = Todos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +316,7 @@
 				BA5C58C02565F84400178AB4 /* Persistence.swift in Sources */,
 				BA5C58B92565F84200178AB4 /* ContentView.swift in Sources */,
 				BA5C58B72565F84200178AB4 /* TodoAppApp.swift in Sources */,
+				BAB1E34C256DC0A40052937E /* TodoCellView.swift in Sources */,
 				BA5C58EA2565FDEE00178AB4 /* APICaller.swift in Sources */,
 				BA615CF625677239003A8DD3 /* TodoModel.swift in Sources */,
 				BA5C58C32565F84400178AB4 /* TodoApp.xcdatamodeld in Sources */,

@@ -13,7 +13,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for index in 0..<10 {
-            let newItem = Item(context: viewContext)
+            let newItem = Todo(context: viewContext)
             newItem.title = "Title_\(index)"
         }
         do {
