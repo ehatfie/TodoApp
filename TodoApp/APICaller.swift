@@ -10,7 +10,7 @@ import Foundation
 class DecodedObject: Decodable, Identifiable {
     let id: String
     let title: String
-    //let completed: Bool
+    let status: String
 }
 
 class DecodedObjectOuter: Decodable {
@@ -59,10 +59,12 @@ class APICaller {
         
         guard let data = try? encoder.encode(todo) else { completion(nil); return }
         print("json string: ", String(data: data, encoding: .utf8)!)
+        
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         URLSession.shared.uploadTask(with: urlRequest, from: data) { data, response, err in
             print("RESPONSE")
             if let data = data {
