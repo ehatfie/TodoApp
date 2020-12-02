@@ -11,7 +11,7 @@ struct TabBarItem: View {
     let index: Int
     let iconName: String
     let label: String
-    var onTap: (Int) -> Void = {_ in} // is this really something we do? should be optional if so
+    var onTap: (Int) -> Void = { _ in } // is this really something we do? should be optional if so
     
     var body: some View {
         VStack {

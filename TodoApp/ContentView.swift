@@ -21,21 +21,9 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            List {
-                ForEach(items) { item in
-                    TodoCellView(todo: item)
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                #if os(iOS)
-                EditButton()
-                #endif
-                
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
-                }
-            }
+            DatePicker(dates: getDates())
+            TodoList()
+            EntryForm()
             HStack {
                 Button("Present") { self.presentingModal = true }
                         .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
@@ -56,6 +44,22 @@ struct ContentView: View {
         }.frame(maxHeight: .infinity, alignment: .bottom)
         
         
+    }
+    
+    func getDates() -> [Date] {
+        let today = Date()
+        var returnDates: [Date] = [today]
+        
+        for i in 0 ... 10 {
+            let offset: Double = 60 * 60 * 24 * Double(i)
+            let timeInterval = today.timeIntervalSinceNow + offset
+            let forwardDate = today.addingTimeInterval(timeInterval)
+            let backwardDate = today.addingTimeInterval((timeInterval * -1))
+            returnDates.append(forwardDate)
+            returnDates.insert(backwardDate, at: 0)
+        }
+        
+        return returnDates
     }
     
     private func getIsCompleted(isCompleted: Bool) -> String {

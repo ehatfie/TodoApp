@@ -21,6 +21,9 @@
 		BA615CF025676DB9003A8DD3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA615CEF25676DB9003A8DD3 /* ModalView.swift */; };
 		BA615CF625677239003A8DD3 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA615CF525677239003A8DD3 /* TodoModel.swift */; };
 		BA86E7C125689076004D468E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86E7C025689076004D468E /* JSON.swift */; };
+		BA9675C02575CAC200E59433 /* EntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9675BF2575CAC200E59433 /* EntryForm.swift */; };
+		BA9675C82575CB9800E59433 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9675C72575CB9800E59433 /* TodoList.swift */; };
+		BAA54BF525774B73009F9042 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA54BF425774B73009F9042 /* DatePicker.swift */; };
 		BAB1E34C256DC0A40052937E /* TodoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB1E34B256DC0A40052937E /* TodoCellView.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +65,9 @@
 		BA615CEF25676DB9003A8DD3 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		BA615CF525677239003A8DD3 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		BA86E7C025689076004D468E /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		BA9675BF2575CAC200E59433 /* EntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryForm.swift; sourceTree = "<group>"; };
+		BA9675C72575CB9800E59433 /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
+		BAA54BF425774B73009F9042 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		BAB1E34B256DC0A40052937E /* TodoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +172,8 @@
 		BA615CDD25676B4D003A8DD3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BAA54BF325774B67009F9042 /* DatePicker */,
+				BA9675BE2575CA6A00E59433 /* Forms */,
 				BA05F64E256DC7C30041F627 /* TabBar */,
 				BAB1E34A256DC0920052937E /* Todos */,
 				BA615CEF25676DB9003A8DD3 /* ModalView.swift */,
@@ -189,10 +197,27 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		BA9675BE2575CA6A00E59433 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				BA9675BF2575CAC200E59433 /* EntryForm.swift */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
+		BAA54BF325774B67009F9042 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				BAA54BF425774B73009F9042 /* DatePicker.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		BAB1E34A256DC0920052937E /* Todos */ = {
 			isa = PBXGroup;
 			children = (
 				BAB1E34B256DC0A40052937E /* TodoCellView.swift */,
+				BA9675C72575CB9800E59433 /* TodoList.swift */,
 			);
 			path = Todos;
 			sourceTree = "<group>";
@@ -326,7 +351,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA9675C02575CAC200E59433 /* EntryForm.swift in Sources */,
+				BAA54BF525774B73009F9042 /* DatePicker.swift in Sources */,
 				BA615CF025676DB9003A8DD3 /* ModalView.swift in Sources */,
+				BA9675C82575CB9800E59433 /* TodoList.swift in Sources */,
 				BA5C58C02565F84400178AB4 /* Persistence.swift in Sources */,
 				BA5C58B92565F84200178AB4 /* ContentView.swift in Sources */,
 				BA5C58B72565F84200178AB4 /* TodoAppApp.swift in Sources */,
