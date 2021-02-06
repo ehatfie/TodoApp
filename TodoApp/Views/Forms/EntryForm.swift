@@ -12,6 +12,8 @@ struct EntryForm: View {
     @State var username: String = ""
     @State var title: String = ""
     @State var completed: Bool = false
+    @State var selectedDate: Date = Date()
+    @State var dueDate: String = ""
     
     var body: some View {
         Form {
@@ -19,12 +21,13 @@ struct EntryForm: View {
                 TextField("Title", text: $title)
                 // toggle
             }
+            DatePicker("Due Date", selection: $selectedDate, displayedComponents: .date)
             Button("submit", action: submit)
         }
     }
     
     private func submit() {
-        let todo = TodoModel(title: self.title)
+        let todo = TodoModel(title: self.title, dueDate: selectedDate.getMonthAndDay())
         APICaller.shared.submit(todo: todo) { value in
             guard let value = value else { return }
             print("RESULT \(value.id)")
@@ -32,7 +35,7 @@ struct EntryForm: View {
             todo.id = UUID(uuidString: value.id)
             todo.title = value.title
             todo.status = value.status
-            
+            todo.dueDate = selectedDate.getMonthAndDay()
             try? viewContext.save()
             //self.presentedAsModal = false
         }
@@ -41,6 +44,6 @@ struct EntryForm: View {
 
 struct EntryForm_Previews: PreviewProvider {
     static var previews: some View {
-        EntryForm()
+        EntryForm(selectedDate: Date())
     }
 }

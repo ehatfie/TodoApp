@@ -20,7 +20,7 @@ struct ModalView: View {
                 self.presentedAsModal = false
             }
             NavigationView {
-                EntryForm()
+                EntryForm(selectedDate: Date())
             }
         }
     }

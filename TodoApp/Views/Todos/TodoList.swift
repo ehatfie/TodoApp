@@ -9,20 +9,40 @@ import SwiftUI
 import CoreData
 
 struct TodoList: View {
+    @Binding var selectedDate: String
     @Environment(\.managedObjectContext) private var viewContext
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Todo.title, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Todo>
-    private var dataItems: [DecodedObject] = []
+    var items: FetchedResults<Todo>
+    var dataItems: [DecodedObject] = []
+    
+//    init(selectedDate: String) {
+//        self.selectedDate = selectedDate
+//
+//    }
+    
     var body: some View {
         List {
-            ForEach(items) { item in
+            let filteredItems = items.filter({ item in
+                guard let itemDueDate = item.dueDate else { return false }
+                print("checking date: \(selectedDate)")
+                return itemDueDate == selectedDate
+            })
+            ForEach(filteredItems) { item in
                 TodoCellView(todo: item)
             }
             .onDelete(perform: deleteItems)
+            .onAppear{
+                print("on appear")
+                displayThis()
+            }
         }
+        .onAppear{
+            print("on appear")
+            displayThis()
+        }
+        .frame(minHeight: 10)
         .toolbar {
             #if os(iOS)
             EditButton()
@@ -32,6 +52,15 @@ struct TodoList: View {
                 Label("Add Item", systemImage: "plus")
             }
         }
+    }
+    
+    func displayThis() {
+        let filteredItems = items.filter({ item in
+            guard let itemDueDate = item.dueDate else { return false }
+            return itemDueDate == selectedDate
+        })
+        
+        print("filtered Items \(filteredItems)")
     }
     
     private func addItem() {
@@ -64,10 +93,11 @@ struct TodoList: View {
             }
         }
     }
+    
 }
 
-struct TodoList_Previews: PreviewProvider {
-    static var previews: some View {
-        TodoList()
-    }
-}
+//struct TodoList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TodoList(selectedDate: "")
+//    }
+//}

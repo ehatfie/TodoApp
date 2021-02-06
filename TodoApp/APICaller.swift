@@ -11,6 +11,7 @@ class DecodedObject: Decodable, Identifiable {
     let id: String
     let title: String
     let status: String
+    let dueDate: String
 }
 
 class DecodedObjectOuter: Decodable {
@@ -18,7 +19,7 @@ class DecodedObjectOuter: Decodable {
 }
 
 class APICaller {
-    private var urlString: String = "http://localhost:8080/todos"
+    private var urlString: String = "http://127.0.0.1:8080/todos" //"http://localhost:8080/todos"
     
     static var shared: APICaller = APICaller()
     
@@ -38,10 +39,10 @@ class APICaller {
                     }
                     
                     if let json = try? decoder.decode(DecodedObjectOuter.self, from: data) {
-                        print("GOTTEM \(json)")
+                        print("GOTTEM fetch \(json)")
                         completion(json.data)
                     } else {
-                        print("NO GOTTEM")
+                        print("NO GOTTEM fetch")
                     }
                 }
             }.resume()
@@ -66,7 +67,7 @@ class APICaller {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         URLSession.shared.uploadTask(with: urlRequest, from: data) { data, response, err in
-            print("RESPONSE")
+            print("RESPONSE submit")
             if let data = data {
                 let decoder = JSONDecoder()
                 
@@ -74,7 +75,7 @@ class APICaller {
                     print("FOO \(foo)")
                 }
                 if let json = try? decoder.decode(DecodedObject.self, from: data) {
-                    print("GOTTEM", json.title)
+                    print("GOTTEM submit", json.title)
                     
                     completion(json)
                 } else {
