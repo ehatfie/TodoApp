@@ -15,6 +15,8 @@ struct EntryForm: View {
     @State var selectedDate: Date = Date()
     @State var dueDate: String = ""
     
+    var onSubmit: () -> Void
+    
     var body: some View {
         Form {
             Section(header: Text("ToDo")) {
@@ -27,23 +29,18 @@ struct EntryForm: View {
     }
     
     private func submit() {
-        let todo = TodoModel(title: self.title, dueDate: selectedDate.getMonthAndDay())
-        APICaller.shared.submit(todo: todo) { value in
-            guard let value = value else { return }
-            print("RESULT \(value.id)")
-            let todo = Todo(context: viewContext)
-            todo.id = UUID(uuidString: value.id)
-            todo.title = value.title
-            todo.status = value.status
-            todo.dueDate = selectedDate.getMonthAndDay()
-            try? viewContext.save()
-            //self.presentedAsModal = false
-        }
+        let todo = Todo(context: viewContext)
+        todo.id = UUID()
+        todo.title = self.title
+        todo.status = Status.pending.rawValue
+        todo.dueDate = selectedDate.getMonthAndDay()
+        try? viewContext.save()
+        onSubmit()
     }
 }
 
 struct EntryForm_Previews: PreviewProvider {
     static var previews: some View {
-        EntryForm(selectedDate: Date())
+        EntryForm(selectedDate: Date(), onSubmit: {})
     }
 }

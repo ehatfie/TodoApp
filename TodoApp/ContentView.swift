@@ -8,6 +8,10 @@
 import SwiftUI
 import CoreData
 
+extension Todo {
+    static let empty = Todo()
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -18,40 +22,61 @@ struct ContentView: View {
     private var dataItems: [DecodedObject] = []
     
     @State var presentingModal = false
-    @State var selectedDate = Date().getMonthAndDay() {
-        didSet {
-            print("did set selectedDate \(selectedDate)")
-        }
-    }
+    @State var presentingDetailView = false
+    @State var selectedDate = Date().getMonthAndDay()
+    @State var selectedTodo: Todo = Todo.empty
 
     var body: some View {
         VStack {
-            DatePicker1(selectedDate: $selectedDate, dates: getDates())
-            TodoList(selectedDate: $selectedDate)
-                .onAppear{
-                    displayThis()
-                }
-            EntryForm()
-            HStack {
-                Button("Present") { self.presentingModal = true }
-                        .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
-                Button("Add 3 random", action: addMultipleRandom)
+            ZStack {
                 VStack {
-                    Button("Fetch sync", action: fetchData)
-                    Button("Fetch async", action: fetchDataAsync)
+                    DatePicker1(selectedDate: $selectedDate, dates: getDates())
+                    TodoList(selectedDate: $selectedDate, presentingModal: $presentingDetailView, selectedTodo: $selectedTodo, items: FetchRequest(
+                                sortDescriptors: [NSSortDescriptor(keyPath: \Todo.title, ascending: true)], predicate: NSPredicate(format:"dueDate == %@", selectedDate),
+                                animation: .default))
+                        .onAppear {
+                            displayThis()
+                        }
+                        .sheet(isPresented: $presentingDetailView, onDismiss: {
+                            self.selectedTodo = Todo.empty
+                            self.presentingDetailView = false
+                        }, content: {
+                            ToDoDetailView(presentedAsModal: $presentingDetailView, todo: $selectedTodo)
+                        })
+                    
+                    //EntryForm()
                 }
-                
-                Button("Delete", action: deleteAll)
+                // on top of above code
+                VStack {
+                    Spacer()// pushes to bottom
+                    HStack {
+                        Spacer() // pushes to right side
+                        Fab(presentingModal: $presentingModal)
+                    }
+                    .frame(alignment: .bottom)
+                }
             }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.blue, lineWidth: 4)
-            )
+            
+            VStack {
+                HStack {
+                    Button("Present") { self.presentingModal = true }
+                        .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
+                    Button("Add 3 random", action: addMultipleRandom)
+                    VStack {
+                        Button("Fetch sync", action: fetchData)
+                        Button("Fetch async", action: fetchDataAsync)
+                    }
+                    
+                    Button("Delete", action: deleteAll)
+                }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.blue, lineWidth: 4)
+                )
+            }
             TabBar()
-        }.frame(maxHeight: .infinity, alignment: .bottom)
-        
-        
+        }.sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal)}
     }
     
     func getDates() -> [Date] {
@@ -262,3 +287,60 @@ struct ContentView_Previews: PreviewProvider {
     move form submission to same screen
     
  */
+
+//struct FloatingView: View {
+//
+//    @State private var currentPosition: CGSize = .zero
+//    @State private var newPosition: CGSize = .zero
+//    @State var presentingModal = false
+//
+//    var body: some View {
+//
+//        Image(systemName: "plus.circle.fill")
+//            .resizable()
+//            .foregroundColor(.blue)
+//            .frame(width: 50, height: 50)
+//            .offset(x: self.currentPosition.width, y: self.currentPosition.height)
+//            .onTapGesture(perform: {
+//                debugPrint("Perform you action here")
+//                presentingModal = true
+//            })
+//            .onLongPressGesture(minimumDuration: 0.1) {
+//                print("on long press")
+//            }
+//            .gesture(DragGesture()
+//                        .onChanged { value in
+//                            self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width,
+//                                                          height: value.translation.height + self.newPosition.height)
+//                        }
+//                        .onEnded { value in
+//                            self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width,
+//                                                          height: value.translation.height + self.newPosition.height)
+//
+//                            self.newPosition = self.currentPosition
+//                        }
+//            )
+//    }
+//}
+
+//                    Button(action: {
+//                        print("BUTTON PRESS")
+//                        self.presentingModal = true
+//                    }, label: {
+//                        Text("+")
+//                            .font(.system(.largeTitle))
+//                            .frame(width: 77, height: 70)
+//                            .foregroundColor(Color.white)
+//                            .padding(.bottom, 7)
+//                    })
+//                    .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal)}
+//                    .background(Color.blue)
+//                    .cornerRadius(38.5)
+//                    .padding()
+//                    .shadow(color: Color.black.opacity(0.3),
+//                            radius: 3,
+//                            x: 3,
+//                            y: 3)
+//                }
+//                .padding(.bottom, 30)
+//                .frame(alignment: .bottom)

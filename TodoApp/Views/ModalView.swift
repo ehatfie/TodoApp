@@ -15,14 +15,13 @@ struct ModalView: View {
     @State var completed: Bool = false
     
     var body: some View {
-        VStack {
-            Button("dismiss") {
-                self.presentedAsModal = false
-            }
-            NavigationView {
-                EntryForm(selectedDate: Date())
-            }
+        NavigationView {
+            EntryForm(selectedDate: Date(), onSubmit: onSubmit)
         }
+    }
+    
+    func onSubmit() {
+        self.presentedAsModal = false
     }
     
 //    private func submit() {

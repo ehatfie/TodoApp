@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		BA05F650256DC7D20041F627 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05F64F256DC7D20041F627 /* TabBar.swift */; };
 		BA05F658256DC82D0041F627 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05F657256DC82D0041F627 /* TabBarItem.swift */; };
+		BA1AB8C525DF17FD00D3A2F6 /* Fab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1AB8C425DF17FD00D3A2F6 /* Fab.swift */; };
+		BA1AB8CD25DF1B9D00D3A2F6 /* DraggableFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1AB8CC25DF1B9D00D3A2F6 /* DraggableFab.swift */; };
+		BA2A1C9E25CE3DA600B7CA2A /* ToDoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2A1C9D25CE3DA600B7CA2A /* ToDoDetailView.swift */; };
 		BA5C58B72565F84200178AB4 /* TodoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58B62565F84200178AB4 /* TodoAppApp.swift */; };
 		BA5C58B92565F84200178AB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C58B82565F84200178AB4 /* ContentView.swift */; };
 		BA5C58BB2565F84400178AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5C58BA2565F84400178AB4 /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 /* Begin PBXFileReference section */
 		BA05F64F256DC7D20041F627 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		BA05F657256DC82D0041F627 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		BA1AB8C425DF17FD00D3A2F6 /* Fab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fab.swift; sourceTree = "<group>"; };
+		BA1AB8CC25DF1B9D00D3A2F6 /* DraggableFab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableFab.swift; sourceTree = "<group>"; };
+		BA2A1C9D25CE3DA600B7CA2A /* ToDoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailView.swift; sourceTree = "<group>"; };
 		BA5C58B32565F84200178AB4 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5C58B62565F84200178AB4 /* TodoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppApp.swift; sourceTree = "<group>"; };
 		BA5C58B82565F84200178AB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +109,15 @@
 				BA05F657256DC82D0041F627 /* TabBarItem.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		BA1AB8C325DF17ED00D3A2F6 /* FAB */ = {
+			isa = PBXGroup;
+			children = (
+				BA1AB8C425DF17FD00D3A2F6 /* Fab.swift */,
+				BA1AB8CC25DF1B9D00D3A2F6 /* DraggableFab.swift */,
+			);
+			path = FAB;
 			sourceTree = "<group>";
 		};
 		BA5C58AA2565F84200178AB4 = {
@@ -172,6 +187,7 @@
 		BA615CDD25676B4D003A8DD3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA1AB8C325DF17ED00D3A2F6 /* FAB */,
 				BAA54BF325774B67009F9042 /* DatePicker */,
 				BA9675BE2575CA6A00E59433 /* Forms */,
 				BA05F64E256DC7C30041F627 /* TabBar */,
@@ -218,6 +234,7 @@
 			children = (
 				BAB1E34B256DC0A40052937E /* TodoCellView.swift */,
 				BA9675C72575CB9800E59433 /* TodoList.swift */,
+				BA2A1C9D25CE3DA600B7CA2A /* ToDoDetailView.swift */,
 			);
 			path = Todos;
 			sourceTree = "<group>";
@@ -361,9 +378,12 @@
 				BA05F658256DC82D0041F627 /* TabBarItem.swift in Sources */,
 				BAB1E34C256DC0A40052937E /* TodoCellView.swift in Sources */,
 				BA5C58EA2565FDEE00178AB4 /* APICaller.swift in Sources */,
+				BA2A1C9E25CE3DA600B7CA2A /* ToDoDetailView.swift in Sources */,
 				BA615CF625677239003A8DD3 /* TodoModel.swift in Sources */,
 				BA5C58C32565F84400178AB4 /* TodoApp.xcdatamodeld in Sources */,
+				BA1AB8C525DF17FD00D3A2F6 /* Fab.swift in Sources */,
 				BA86E7C125689076004D468E /* JSON.swift in Sources */,
+				BA1AB8CD25DF1B9D00D3A2F6 /* DraggableFab.swift in Sources */,
 				BA05F650256DC7D20041F627 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

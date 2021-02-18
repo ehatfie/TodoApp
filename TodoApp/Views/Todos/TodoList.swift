@@ -10,37 +10,26 @@ import CoreData
 
 struct TodoList: View {
     @Binding var selectedDate: String
+    @Binding var presentingModal: Bool
+    @Binding var selectedTodo: Todo
+    
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Todo.title, ascending: true)],
-        animation: .default)
+    
+    @FetchRequest
+    
     var items: FetchedResults<Todo>
     var dataItems: [DecodedObject] = []
     
-//    init(selectedDate: String) {
-//        self.selectedDate = selectedDate
-//
-//    }
-    
     var body: some View {
         List {
-            let filteredItems = items.filter({ item in
-                guard let itemDueDate = item.dueDate else { return false }
-                print("checking date: \(selectedDate)")
-                return itemDueDate == selectedDate
-            })
-            ForEach(filteredItems) { item in
+            ForEach(items) { item in
                 TodoCellView(todo: item)
+                    .onTapGesture {
+                        self.selectedTodo = item
+                        self.presentingModal = true
+                    }
             }
             .onDelete(perform: deleteItems)
-            .onAppear{
-                print("on appear")
-                displayThis()
-            }
-        }
-        .onAppear{
-            print("on appear")
-            displayThis()
         }
         .frame(minHeight: 10)
         .toolbar {
