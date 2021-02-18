@@ -18,27 +18,20 @@ struct ContentView: View {
     private var dataItems: [DecodedObject] = []
     
     @State var presentingModal = false
+    @State var selectedDate = Date().getMonthAndDay() {
+        didSet {
+            print("did set selectedDate \(selectedDate)")
+        }
+    }
 
     var body: some View {
         VStack {
-            
-            //.border(Color.black)
-            
-            List {
-                ForEach(items) { item in
-                    TodoCellView(todo: item)
+            DatePicker1(selectedDate: $selectedDate, dates: getDates())
+            TodoList(selectedDate: $selectedDate)
+                .onAppear{
+                    displayThis()
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                #if os(iOS)
-                EditButton()
-                #endif
-                
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
-                }
-            }
+            EntryForm()
             HStack {
                 Button("Present") { self.presentingModal = true }
                         .sheet(isPresented: $presentingModal) { ModalView(presentedAsModal: self.$presentingModal) }
@@ -52,12 +45,30 @@ struct ContentView: View {
             }
             .padding()
             .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.blue, lineWidth: 4)
-                )
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.blue, lineWidth: 4)
+            )
+            TabBar()
+        }.frame(maxHeight: .infinity, alignment: .bottom)
+        
+        
+    }
+    
+    func getDates() -> [Date] {
+        let today = Date()
+        var returnDates: [Date] = [today]
+        
+        for i in 1 ... 10 {
+            let offset: Double = 60 * 60 * 24 * Double(i)
+            let timeInterval = today.timeIntervalSinceNow + offset
+            let forwardDate = today.addingTimeInterval(timeInterval)
+            let backwardDate = today.addingTimeInterval((timeInterval * -1))
+            returnDates.append(forwardDate)
+            returnDates.insert(backwardDate, at: 0)
+            //print("setting \(forwardDate) and \(backwardDate)")
         }
         
-        
+        return returnDates
     }
     
     private func getIsCompleted(isCompleted: Bool) -> String {
@@ -93,17 +104,34 @@ struct ContentView: View {
         for _ in 0 ..< count {
             addRandom()
         }
+        
+        displayThis()
     }
     
     private func addRandom() {
         var gen = SystemRandomNumberGenerator()
         
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.title = "\(items.count)"
-            newItem.completed = gen.next() % 2 == 0
-            try? self.viewContext.save()
+        let newItem = Item(context: viewContext)
+        newItem.title = "\(items.count)"
+        newItem.completed = gen.next() % 2 == 0
+        newItem.uuid = UUID()
+        let newItem2 = Todo(context: viewContext)
+        newItem2.dueDate = self.selectedDate
+        newItem2.id = UUID()
+        newItem2.status = "completed"
+        newItem2.title = "\(items.count)"
+        print("saving \(newItem2)")
+        do {
+            try self.viewContext.save()
+            // try self.viewContext.save()
+        } catch let e {
+            print("Error saving item \(newItem) \(e)")
         }
+        
+//        withAnimation {
+//
+//
+//        }
     }
     
     private func addResult(data: DecodedObject) {
@@ -195,6 +223,19 @@ struct ContentView: View {
             }
         }
     }
+    
+    func displayThis() {
+        //self.selectedDate = Date().getMonthAndDay()
+        let filteredItems = items.filter({ item in
+            guard let itemDueDate = item.dueDate else { return false }
+            return itemDueDate == selectedDate
+        })
+        print("items count \(items.count)")
+        items.forEach { val in
+            print("item: \(val)")
+        }
+        print("filtered Items \(filteredItems)")
+    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -207,7 +248,7 @@ private let itemFormatter: DateFormatter = {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    
             ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }

@@ -16,21 +16,25 @@ enum Status: String, Codable, CaseIterable {
 struct TodoModel: Encodable {
     let title: String
     let status: Status
+    let dueDate: String
     
-    init(title: String, status: String) {
+    init(title: String, status: String, dueDate: String) {
         self.title = title
         self.status = Status(rawValue: status) ?? Status.pending
+        self.dueDate = dueDate
     }
     
-    init(title: String, status: Status = .pending) {
+    init(title: String, status: Status = .pending, dueDate: String) {
         self.title = title
         self.status = status
+        self.dueDate = dueDate
     }
     
     private func getJsonRepresentation() -> [String: Any] {
         return [
             "title": title,
-            "Status": status
+            "Status": status,
+            "dueDate": dueDate
         ]
     }
     

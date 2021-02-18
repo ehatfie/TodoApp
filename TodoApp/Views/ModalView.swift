@@ -20,33 +20,26 @@ struct ModalView: View {
                 self.presentedAsModal = false
             }
             NavigationView {
-                Form {
-                    Section(header: Text("ToDo")) {
-                        TextField("Title", text: $title)
-                        // toggle
-                    }
-                    Button("submit", action: submit)
-                }
-                .navigationBarTitle("Settings")
+                EntryForm(selectedDate: Date())
             }
         }
     }
     
-    private func submit() {
-        let todo = TodoModel(title: self.title)
-        APICaller.shared.submit(todo: todo) { value in
-            
-            guard let value = value else { self.presentedAsModal = false; return }
-            print("RESULT \(value.id)")
-            let todo = Todo(context: viewContext)
-            todo.id = UUID(uuidString: value.id)
-            todo.title = value.title
-            todo.status = value.status
-            
-            try? viewContext.save()
-            self.presentedAsModal = false
-        }
-    }
+//    private func submit() {
+//        let todo = TodoModel(title: self.title)
+//        APICaller.shared.submit(todo: todo) { value in
+//            
+//            guard let value = value else { self.presentedAsModal = false; return }
+//            print("RESULT \(value.id)")
+//            let todo = Todo(context: viewContext)
+//            todo.id = UUID(uuidString: value.id)
+//            todo.title = value.title
+//            todo.status = value.status
+//            
+//            try? viewContext.save()
+//            self.presentedAsModal = false
+//        }
+//    }
 }
 
 //struct ModalView_Previews: PreviewProvider {
