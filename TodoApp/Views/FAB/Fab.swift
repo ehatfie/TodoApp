@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/**
+ Todo ideas:
+    menu item takes you between views
+ */
+
 struct Fab: View {
 
     @Binding var presentingModal: Bool
